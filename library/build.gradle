@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-android:1.7.25'
+    implementation 'org.slf4j:slf4j-api:1.7.25'
 //    implementation "com.android.support:appcompat-v7:$project.ANDROID_SUPPORT_LIBRARY_VERSION"
 //    testImplementation 'junit:junit:4.12'
 //    testImplementation "org.robolectric:robolectric:3.8"
