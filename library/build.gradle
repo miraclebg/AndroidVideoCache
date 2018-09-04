@@ -1,49 +1,40 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.novoda:bintray-release:0.4.0'
-    }
-}
-
-apply plugin: 'com.android.library'
-apply plugin: 'idea'
-apply plugin: 'bintray-release'
+apply plugin: "com.android.library"
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.2'
+    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_COMPILE_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 23
-        versionCode 22
-        versionName '2.7.1'
+        minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
-}
-
-idea {
-    module {
-        downloadJavadoc = true
-        downloadSources = true
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+        }
+        beta {
+            debuggable true
+            jniDebuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            jniDebuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-android:1.7.21'
+    compile 'org.slf4j:slf4j-android:1.7.25'
+//    implementation "com.android.support:appcompat-v7:$project.ANDROID_SUPPORT_LIBRARY_VERSION"
+//    testImplementation 'junit:junit:4.12'
+//    testImplementation "org.robolectric:robolectric:3.8"
 }
 
-publish {
-    userOrg = 'alexeydanilov'
-    groupId = 'com.danikula'
-    artifactId = 'videocache'
-    publishVersion = android.defaultConfig.versionName
-    description = 'Cache support for android VideoView'
-    website = 'https://github.com/danikula/AndroidVideoCache'
-}
+
+
